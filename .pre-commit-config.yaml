@@ -7,7 +7,7 @@ repos:
       args: ["--extend-select", "I","--fix", "--show-fixes"]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.0
   hooks:
     - id: codespell
 

@@ -1,0 +1,43 @@
+{
+	"name": "Python 3 Env",
+	"build": {
+		"dockerfile": "dev.Dockerfile",
+		"context": ".."
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git-lfs:1": "none",
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"charliermarsh.ruff",
+				"ms-vsliveshare.vsliveshare",
+				"ryanluker.vscode-coverage-gutters",
+				"tamasfe.even-better-toml",
+				"github.copilot",
+				"github.copilot-chat",
+				"mhutchie.git-graph",
+				"arturock.gitstash",
+				"eamodio.gitlens"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"black-formatter.path": [
+					"/usr/local/py-utils/bin/black"
+				]
+			}
+		}
+	},
+	"onCreateCommand": "pre-commit install-hooks",
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "python3 -m pip install -e .[dev]"
+
+}
