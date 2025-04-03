@@ -60,20 +60,20 @@ echo
 
 # Update pyproject.toml
 echo "Updating pyproject.toml..."
-sed -i "s/name = \"python-library-template\"/name = \"$PACKAGE_NAME\"/" pyproject.toml
+sed -i "s/name = \"python-package-template\"/name = \"$PACKAGE_NAME\"/" pyproject.toml
 sed -i "s/{ name = \"changshan\", email = \"changshanshi@outlook.com\" }/{ name = \"$AUTHOR_NAME\", email = \"$AUTHOR_EMAIL\" }/" pyproject.toml
 
 # Update the source directory name
 echo "Renaming source directory..."
-if [ -d "src/python_library_template" ]; then
+if [ -d "src/python_package_template" ]; then
     mkdir -p "src/$PACKAGE_NAME_UNDERSCORE"
     # Copy files from old directory to new directory
-    cp -r src/python_library_template/* "src/$PACKAGE_NAME_UNDERSCORE/"
+    cp -r src/python_package_template/* "src/$PACKAGE_NAME_UNDERSCORE/"
     # Remove old directory
-    rm -rf src/python_library_template
-    echo "Source directory renamed from 'src/python_library_template' to 'src/$PACKAGE_NAME_UNDERSCORE'"
+    rm -rf src/python_package_template
+    echo "Source directory renamed from 'src/python_package_template' to 'src/$PACKAGE_NAME_UNDERSCORE'"
 else
-    echo "Warning: src/python_library_template directory not found"
+    echo "Warning: src/python_package_template directory not found"
 fi
 
 # Update README.md

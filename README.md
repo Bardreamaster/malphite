@@ -1,4 +1,4 @@
-# Python Library Template
+# Python Package Template
 
 ## Quick Start
 
