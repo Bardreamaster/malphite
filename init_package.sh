@@ -135,6 +135,10 @@ if [ $? -ne 0 ]; then
     echo "Warning: sphinx-quickstart failed."
 fi
 
+# rename project directory
+cd ..
+mv python_package_template "$PACKAGE_NAME_UNDERSCORE"
+
 echo "Package successfully initialized!"
 echo "Next steps:"
 echo "1. Add your code to src/$PACKAGE_NAME_UNDERSCORE"
