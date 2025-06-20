@@ -56,7 +56,6 @@ echo "Package Name: $PACKAGE_NAME"
 echo "Python Module Name: $PACKAGE_NAME_UNDERSCORE"
 echo "Author: $AUTHOR_NAME"
 echo "Email: $AUTHOR_EMAIL"
-echo
 
 # Update pyproject.toml
 echo "Updating pyproject.toml..."
@@ -84,7 +83,7 @@ cat > README.md << EOF
 ## Installation
 
 \`\`\`bash
-pip install $PACKAGE_NAME
+python3 -m pip install $PACKAGE_NAME
 \`\`\`
 
 ## Usage
@@ -133,11 +132,20 @@ sphinx-quickstart --sep \
 
 if [ $? -ne 0 ]; then
     echo "Warning: sphinx-quickstart failed."
+    exit 1
 fi
 
-# rename project directory
 cd ..
-mv python_package_template "$PACKAGE_NAME_UNDERSCORE"
+# Get the current directory name
+CURRENT_DIR=$(basename "$PWD")
+CURRENT_DIR="${CURRENT_DIR%/}"
+# Check if the current directory is the same as the package name
+if [ "$CURRENT_DIR" != "$PACKAGE_NAME_UNDERSCORE" ]; then
+    echo "Renaming current directory to match package name..."
+    cd ..
+    mv "$CURRENT_DIR" "$PACKAGE_NAME_UNDERSCORE"
+    cd "$PACKAGE_NAME_UNDERSCORE"
+fi
 
 echo "Package successfully initialized!"
 echo "Next steps:"
