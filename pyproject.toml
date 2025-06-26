@@ -1,13 +1,26 @@
 [project]
-name = "python-package-template"
+name = "malphite"
 version = "0.1.0"
-description = "Add your description here"
+description = "Shared Camera Library for Python."
 readme = "README.md"
 authors = [
-    { name = "changshan", email = "changshanshi@outlook.com" }
+    { name = "WeiJinqi", email = "changshanshi@outlook.com" }
+]
+license = { file = "LICENSE" }
+keywords = ["camera", "opencv", "shared", "python", "shared memory"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "opencv-python>=4.11.0.86",
+    "sharklog>=0.1.1",
+]
+
+[project.urls]
+Repository = "https://github.com/Bardreamaster/malphite"
 
 [build-system]
 requires = ["hatchling"]
