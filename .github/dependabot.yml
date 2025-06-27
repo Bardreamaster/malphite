@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    commit-message:
+      prefix: 🤖⏫
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: pip
+    directory: /
+    commit-message:
+      prefix: 🤖⏫
+    schedule:
+      interval: monthly
