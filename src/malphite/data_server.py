@@ -22,12 +22,27 @@ class SharedCameraServer:
     def contains_camera(self, camera_name: str) -> bool:
         """
         Checks if a camera with the given name exists in the server.
+
+        Parameters:
+            camera_name (str): The name of the camera to check.
         """
         return any(cam._config.name == camera_name for cam in self.cameras)
 
     def append_camera(
         self, camera_config: CameraConfig, shared_memory_name: str = None
     ) -> SharedCameraConfig:
+        """Appends a camera to the server.
+
+        Args:
+            camera_config (CameraConfig): The configuration for the camera.
+            shared_memory_name (str, optional): The name of the shared memory segment. Defaults to be the same as the camera name in `camera_config`.
+
+        Raises:
+            ValueError: If a camera with the same name already exists.
+
+        Returns:
+            SharedCameraConfig: The shared camera configuration which can be used to access the camera data from other processes.
+        """
         if self.contains_camera(camera_config.name):
             raise ValueError(f"Camera with name '{camera_config.name}' already exists.")
         camera = ManagedCamera(camera_config, shared_memory_name)
@@ -38,7 +53,23 @@ class SharedCameraServer:
     def extend_cameras(
         self, camera_configs: list[CameraConfig]
     ) -> list[SharedCameraConfig]:
+        """
+        Extends the server with multiple cameras.
+
+        Args:
+            camera_configs (list[CameraConfig]): The list of camera configurations.
+
+        Returns:
+            list[SharedCameraConfig]: The list of shared camera configurations.
+        """
         return [self.append_camera(config) for config in camera_configs]
+
+    # TODO: Implement a method to remove a camera by name or index
+
+    # TODO:
+    # @overload
+    # def activate_camera_streaming(self,) -> None:
+    #     pass
 
     @overload
     def activate_camera_streaming(self, camera_name: str) -> None:
@@ -48,19 +79,25 @@ class SharedCameraServer:
     def activate_camera_streaming(self, index: int) -> None:
         pass
 
-    def activate_camera_streaming(self, input: str | int) -> None:
+    def activate_camera_streaming(
+        self, camera_name: str | None = None, index: int | None = None
+    ) -> None:
         """
         Activates the camera streaming for a specific camera by name or index.
         """
-        if isinstance(input, str):
+        if isinstance(camera_name, str):  # TODO: validate camera_name
             idx = next(
-                (i for i, cam in enumerate(self.cameras) if cam._config.name == input),
+                (
+                    i
+                    for i, cam in enumerate(self.cameras)
+                    if cam._config.name == camera_name
+                ),
                 None,
             )
-        elif isinstance(input, int):
-            if input < 0 or input >= len(self.cameras):
+        elif isinstance(index, int):
+            if index < 0 or index >= len(self.cameras):
                 raise IndexError("Camera index out of range.")
-            idx = input
+            idx = index
         else:
             raise TypeError(
                 "Input must be either a camera name (str) or an index (int)."
