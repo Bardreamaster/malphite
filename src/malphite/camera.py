@@ -19,6 +19,11 @@ class CameraConfigurationError(Exception):
 class Camera(ABC):
 
     def __init__(self, camera_config: CameraConfig):
+        """Initialize the camera with the given configuration.
+
+        Args:
+            camera_config (CameraConfig): The configuration for the camera.
+        """
         self._config = camera_config
         self.name = self._config.name
         self.width = self._config.width
@@ -27,6 +32,11 @@ class Camera(ABC):
 
     @abstractmethod
     def read_once(self) -> np.ndarray:
+        """Reads a single frame from the camera.
+
+        Returns:
+            np.ndarray: The captured frame.
+        """
         pass
 
 

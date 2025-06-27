@@ -1,3 +1,4 @@
+# From https://github.com/python/cpython/issues/82300#issuecomment-2169035092
 import sys
 import threading
 from multiprocessing import resource_tracker as _mprt
