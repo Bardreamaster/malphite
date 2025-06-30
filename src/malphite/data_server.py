@@ -66,10 +66,10 @@ class SharedCameraServer:
     After the server process down, all shared memory will be closed and unlinked.
     """
 
-    _cameras: list[ManagedCamera] = []
-    _streaming_processes: list[Process | None] = []
-
     def __init__(self, camera_configs: list[CameraConfig] = None):
+        self._cameras: list[ManagedCamera] = []
+        self._streaming_processes: list[Process | None] = []
+
         if camera_configs:
             for config in camera_configs:
                 self.append_camera(config)

@@ -1,8 +1,8 @@
 name: Deploy Documentation to GitHub Pages
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ main ]
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -29,11 +29,8 @@ jobs:
         run: |
           uv sync --only-dev
 
-
       - name: Build documentation
-        run: |
-          source .venv/bin/activate
-          make -C docs html
+        run: uv run make -C docs html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
