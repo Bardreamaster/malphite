@@ -1,13 +1,14 @@
----
-hide-toc: true
----
-
 # malphite documentation
 
 ```{toctree}
-:maxdepth: 2
+:hidden:
 
 installation
-apidocs/index
+```
 
+```{toctree}
+:hidden:
+:caption: Development
+
+apidocs/index
 ```

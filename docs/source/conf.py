@@ -34,18 +34,17 @@ exclude_patterns = []
 autodoc2_packages = [
     "../../src/malphite",
 ]
-autodoc2_module_all_regexes = [
-    r"malphite\.*",  # TODO: r"malphite\..*"
-]
+autodoc2_module_all_regexes = []
+
 # autodoc2_render_plugin = "myst"
 autodoc2_docstring_parser_regexes = [
     # this will render all docstrings as Markdown
     (r".*", "docstring_parser"),
 ]
 ## ignore all warnings from this package
-nitpick_ignore_regex = [
-    ("py:.*", r"malphite\..*"),
-]
+# nitpick_ignore_regex = [
+#     ("py:.*", r"malphite\..*"),
+# ]
 
 # myst config
 ## enable md docstring

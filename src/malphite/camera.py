@@ -37,17 +37,29 @@ class Camera(ABC):
         Returns:
             np.ndarray: The captured frame.
         """
-        pass
+        ...
 
 
 @dataclass
 class CameraConfig(ABC):
+    """Base configuration class for cameras."""
+
     name: str | None = None
+    """The name of the camera. """
+
     width: int | None = None
+    """The width of the camera image in pixels."""
+
     height: int | None = None
+    """The height of the camera image in pixels."""
+
     fps: float | None = None
+    """The frames per second (FPS) of the camera."""
+
     type: str | None = None
+
     target_class: type = Camera
+    """The target class to instantiate with. This should be a subclass of `Camera`."""
 
 
 class OpenCVCamera(Camera):
@@ -92,6 +104,9 @@ class OpenCVCamera(Camera):
         self.fps = round(actual_fps)
         self.width = round(actual_width)
         self.height = round(actual_height)
+        self._config.width = self.width
+        self._config.height = self.height
+        self._config.fps = self.fps
 
     def read_once(self) -> np.ndarray:
         """
@@ -109,8 +124,13 @@ class OpenCVCamera(Camera):
 
 @dataclass
 class OpenCVCameraConfig(CameraConfig):
+    """Configuration for an OpenCV camera."""
+
     camera_path: str = None
+    """The path to the camera device, e.g., '/dev/video0'."""
+
     type: str = "opencv"
+
     target_class: type = OpenCVCamera
 
 
@@ -178,8 +198,14 @@ class ManagedCamera(Camera):
     _instance: Camera = None
 
     def __init__(self, camera_config: CameraConfig, shared_memory_name: str = None):
+        super().__init__(camera_config)
+
         self._config = camera_config
         self._instance = self._config.target_class(self._config)
+
+        self._config.width = self._instance.width
+        self._config.height = self._instance.height
+        self._config.fps = self._instance.fps
 
         self.shared_memory_name = getattr(self._instance, "shared_memory_name", None)
         if self.shared_memory_name is None:
