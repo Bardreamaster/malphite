@@ -12,6 +12,7 @@ example.md
 :caption: Development
 
 development/documentation.md
+development/test.md
 
 apidocs/index
 ```
