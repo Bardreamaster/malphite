@@ -6,6 +6,7 @@ readme = "README.md"
 authors = [
     { name = "WeiJinqi", email = "changshanshi@outlook.com" }
 ]
+
 license = { file = "LICENSE" }
 keywords = ["camera", "opencv", "shared", "python", "shared memory"]
 classifiers = [
@@ -21,18 +22,11 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/Bardreamaster/malphite"
+Documentation = "https://bardreamaster.github.io/malphite/"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[project.optional-dependencies]
-dev = [
-    "ruff",
-    "black",
-    "pytest",
-    "pre-commit",
-]
 
 [tool.ruff.lint]
 select = ["I"]
