@@ -5,6 +5,7 @@
 
 installation
 example.md
+shared_memory.md
 ```
 
 ```{toctree}
