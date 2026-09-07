@@ -1,18 +1,18 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.12.1"
+  rev: "v0.16.6"
   hooks:
     - id: ruff
       args: ["--extend-select", "I","--fix", "--show-fixes"]
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.3
   hooks:
     - id: codespell
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-added-large-files
   - id: check-case-conflict
@@ -23,7 +23,7 @@ repos:
   - id: requirements-txt-fixer
   - id: trailing-whitespace
 
--   repo: https://github.com/psf/black
-    rev: 25.1.0
+-   repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 26.5.1
     hooks:
     -   id: black
